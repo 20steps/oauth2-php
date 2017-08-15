@@ -24,7 +24,7 @@ class OAuth2ServerException extends \Exception
      * @param string $error            A single error code.
      * @param string $errorDescription (optional) A human-readable text providing additional information, used to assist in the understanding and resolution of the error occurred.
      */
-    public function __construct($httpStatusCode, $error, $errorDescription = null)
+    public function __construct($httpStatusCode, $error, $errorDescription = null, $loginHint = null)
     {
         parent::__construct($error);
 
@@ -32,6 +32,9 @@ class OAuth2ServerException extends \Exception
 
         $this->errorData['error'] = $error;
         $this->errorData['error_description'] = $errorDescription;
+        if ($loginHint) {
+	        $this->errorData['loginHint'] = $loginHint;
+        }
     }
 
     /**
